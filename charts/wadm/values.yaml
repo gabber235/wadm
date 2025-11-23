@@ -83,3 +83,15 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+# Extra volumes to add to the deployment
+extraVolumes: []
+# - name: extra-volume
+#   configMap:
+#     name: extra-config
+
+# Extra volume mounts to add to the wadm container
+extraVolumeMounts: []
+# - name: extra-volume
+#   mountPath: /extra/path
+#   readOnly: true

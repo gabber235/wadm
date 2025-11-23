@@ -83,24 +83,34 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{- define "wadm.nats.creds_volume_mount" -}}
-{{- if .Values.wadm.config.nats.creds.secretName -}}
+{{- if or .Values.wadm.config.nats.creds.secretName .Values.extraVolumeMounts -}}
 volumeMounts:
+{{- if .Values.wadm.config.nats.creds.secretName }}
 - name: nats-creds-secret-volume
   mountPath: "/etc/nats-creds"
   readOnly: true
 {{- end }}
+{{- with .Values.extraVolumeMounts }}
+{{- toYaml . | nindent 0 }}
+{{- end }}
+{{- end }}
 {{- end }}
 
 {{- define "wadm.nats.creds_volume" -}}
-{{- with .Values.wadm.config.nats.creds -}}
-{{- if .secretName -}}
+{{- if or (and .Values.wadm.config.nats.creds .Values.wadm.config.nats.creds.secretName) .Values.extraVolumes -}}
 volumes:
+{{- with .Values.wadm.config.nats.creds -}}
+{{- if .secretName }}
 - name: nats-creds-secret-volume
   secret:
     secretName: {{ .secretName }}
     items:
     - key: {{ .key }}
       path: "nats.creds"
+{{- end }}
+{{- end }}
+{{- with $.Values.extraVolumes }}
+{{- toYaml . | nindent 0 }}
 {{- end }}
 {{- end }}
 {{- end }}
