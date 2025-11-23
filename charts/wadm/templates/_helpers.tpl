@@ -82,7 +82,7 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 {{- end }}
 
-{{- define "wadm.nats.creds_volume_mount" -}}
+{{- define "wadm.volumeMounts" -}}
 {{- if or .Values.wadm.config.nats.creds.secretName .Values.extraVolumeMounts -}}
 volumeMounts:
 {{- if .Values.wadm.config.nats.creds.secretName }}
@@ -96,7 +96,7 @@ volumeMounts:
 {{- end }}
 {{- end }}
 
-{{- define "wadm.nats.creds_volume" -}}
+{{- define "wadm.volumes" -}}
 {{- if or (and .Values.wadm.config.nats.creds .Values.wadm.config.nats.creds.secretName) .Values.extraVolumes -}}
 volumes:
 {{- with .Values.wadm.config.nats.creds -}}

@@ -90,8 +90,8 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- include "wadm.nats.creds_volume_mount" . | nindent 10 -}}
-      {{- include "wadm.nats.creds_volume" . | nindent 6 -}}
+          {{- include "wadm.volumeMounts" . | nindent 10 -}}
+      {{- include "wadm.volumes" . | nindent 6 -}}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
