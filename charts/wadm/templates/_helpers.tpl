@@ -91,7 +91,7 @@ volumeMounts:
   readOnly: true
 {{- end }}
 {{- with .Values.extraVolumeMounts }}
-{{- toYaml . | nindent 0 }}
+{{- toYaml . | nindent 2 }}
 {{- end }}
 {{- end }}
 {{- end }}
@@ -110,7 +110,7 @@ volumes:
 {{- end }}
 {{- end }}
 {{- with .Values.extraVolumes }}
-{{- toYaml . | nindent 0 }}
+{{- toYaml . | nindent 2 }}
 {{- end }}
 {{- end }}
 {{- end }}
