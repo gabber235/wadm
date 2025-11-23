@@ -109,7 +109,7 @@ volumes:
       path: "nats.creds"
 {{- end }}
 {{- end }}
-{{- with $.Values.extraVolumes }}
+{{- with .Values.extraVolumes }}
 {{- toYaml . | nindent 0 }}
 {{- end }}
 {{- end }}
